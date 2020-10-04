@@ -36,10 +36,10 @@ const title = '/?title=error magni fugiat dolorem impedit molestiae illo ullam d
 const datatitle = processData(title);
 
 fetch(origin + path)
-  .then(parseResponse)
-  .then(processData)
-  .then(testData)
-  .catch(handleRejection);
+  .then(res => parseResponse(res))
+  .then(data => processData(data))
+  .then(processedData => testData(processedData))
+  .catch(err => handleRejection(err));
 
 
 
