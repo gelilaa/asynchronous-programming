@@ -5,12 +5,19 @@ const log = labeledLogger('3. Write URL');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = _;
+const path = '/isolate/04-fetchs/fake-api/worms-types.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 
 
 // careful!  these are not in order ;)
+const parseResponse = (response) => {
+  const parsedResponse = response.json();
+  log('response: ', response, '\n',
+    'parsed: ', parsedResponse);
+  return parsedResponse;
+};
+
 
 const testWormsTypes = (wormsTypes) => {
   log('wormsTypes: ', wormsTypes);
@@ -31,17 +38,6 @@ const testWormsTypes = (wormsTypes) => {
   });
 };
 
-const parseResponse = (response) => {
-  const parsedResponse = response.json();
-  log('response: ', response, '\n',
-    'parsed: ', parsedResponse);
-  return parsedResponse;
-};
-
-const handleRejection = (err) => {
-  log(err);
-};
-
 const separateAustralianTypes = (worms) => {
   log('worms:', worms);
   const siberianWorms = {};
@@ -53,14 +49,18 @@ const separateAustralianTypes = (worms) => {
   return siberianWorms;
 };
 
+const handleRejection = (err) => {
+  log(err);
+};
+
 
 
 
 fetch(requestURL)
-  .then(_)
-  .then(_)
-  .then(_)
-  .catch(_);
+  .then(parseResponse)
+  .then(separateAustralianTypes)
+  .then(testWormsTypes)
+  .catch(handleRejection);
 
 
 

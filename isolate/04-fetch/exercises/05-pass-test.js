@@ -24,6 +24,7 @@ const parseResponse = (response) => {
 
 const lengthOfData = (data) => {
   // write me!
+  dataLength
 };
 
 const testDataLength = (dataLength) => {

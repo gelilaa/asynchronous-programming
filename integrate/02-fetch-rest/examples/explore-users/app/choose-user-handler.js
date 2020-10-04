@@ -1,6 +1,7 @@
 import { User } from './user.js';
 
 export const chooseUserHandler = (event) => {
+  debugger;
   const userId = event.target.form.userId.value;
 
   fetch('https://jsonplaceholder.typicode.com/users/' + userId)

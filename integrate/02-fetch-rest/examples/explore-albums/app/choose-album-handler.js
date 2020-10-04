@@ -1,6 +1,6 @@
 import { Album } from './album.js';
-
 export const chooseAlbumHandler = (event) => {
+  debugger;
   const albumId = event.target.form.albumId.value;
 
   fetch('https://jsonplaceholder.typicode.com/albums/' + albumId)

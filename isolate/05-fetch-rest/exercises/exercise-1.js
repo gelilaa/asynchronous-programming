@@ -32,7 +32,8 @@ const handleRejection = (err) => {
   log(err);
 };
 
-
+const title = '/?title=error magni fugiat dolorem impedit molestiae illo ullam debitis';
+const datatitle = processData(title);
 
 fetch(origin + path)
   .then(parseResponse)
