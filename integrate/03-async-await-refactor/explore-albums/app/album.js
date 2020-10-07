@@ -10,18 +10,23 @@ export class Album {
 
   constructor(albumData) {
     Object.assign(this, albumData);
+    this.photos =albumData.photos.map(photo => new Photo(photo));
+    this.populated = true;
   }
 
-  populate() {
-    return fetch('https://jsonplaceholder.typicode.com/albums/' + this.id + '/photos')
-      .then(res => res.json())
-      .then(photos => {
-        this.photos = photos
-          .map(photo => new Photo(photo));
-        this.populated = true;
-        return this;
-      })
-      .catch(err => console.error(err));
+ async populate() {
+   try{
+     const response = await fetch('https://jsonplaceholder.typicode.com/albums/' + this.id + '/photos')
+     const photos = await response.json();
+    
+     return this;
+
+   }catch(error){
+     this.photos = [];
+     return this;
+   }
+    
+   
   }
 
   render() {
